@@ -28,19 +28,19 @@ library(purrr)
 library(tibble)
 #-------------Set up-------------#
 #Upload main intake data (affetced individuals)
-bf.intake <- read.csv("/Users/mac1/Desktop/Barth_Syndrome_Data/BSFintake_known_812.csv")
+bf.intake <- read.csv("~/Barth_Syndrome_Data/BSFintake_known_812.csv")
 #Drop one duplicates
 length(unique(bf.intake$Intake_ID))
 bf.intake<-bf.intake%>%filter(Patient_ID!=447)
 
 #Upload gender data
-bf_gender<-read_csv('/Users/mac1/Desktop/Barth_Syndrome_Data/bsfdata_gender.csv')
+bf_gender<-read_csv('~/Barth_Syndrome_Data/bsfdata_gender.csv')
 bf_gender<-bf_gender%>%dplyr::select(Intake_ID,Gender)
 #merge with intake data
 bf.intake<-merge(bf.intake,bf_gender,by='Intake_ID', all.x = TRUE)
 
 #Upload intake data (published cases)
-bf.intake.na<-read_csv('/Users/mac1/Desktop/Barth_Syndrome_Data/BSFintake_unknown_812.csv')
+bf.intake.na<-read_csv('~/Barth_Syndrome_Data/BSFintake_unknown_812.csv')
 #indicator of known or unknown to BSF
 bf.intake<-bf.intake%>%mutate(bsf_known=1)
 bf.intake.na<-bf.intake.na%>%mutate(bsf_known=0)
@@ -136,7 +136,7 @@ sum(n_per_id == 1) # 88 subject have only 1 response survey
 mean(n_per_id)
 
 #Upload current symptom data
-current<-read.csv('/Users/mac1/Desktop/Barth_Syndrome_Data/current_symptom812.csv')
+current<-read.csv('~/Barth_Syndrome_Data/current_symptom812.csv')
 #Drop empty ID and missing survey age -->Current symptom Survey cohort: 125
 current<-current%>%filter(!is.na(Age.At.Survey))%>%filter(Intake.ID!=999)
 length(unique(current$Intake.ID))
